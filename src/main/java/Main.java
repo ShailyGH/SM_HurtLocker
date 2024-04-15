@@ -3,8 +3,8 @@ import java.io.IOException;
 
 public class Main {
 
-    public String readRawDataToString() throws Exception{
-        ClassLoader classLoader = getClass().getClassLoader();
+    public static String readRawDataToString() throws Exception{
+        ClassLoader classLoader = Main.class.getClassLoader();
         String result = IOUtils.toString(classLoader.getResourceAsStream("RawData.txt"));
         return result;
     }
