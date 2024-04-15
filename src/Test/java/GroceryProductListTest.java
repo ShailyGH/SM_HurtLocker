@@ -52,8 +52,8 @@ public class GroceryProductListTest
 
     @Test
     public void setType() throws Exception {
-        String expected = "Book";
-        groceryProductList.setType("Book");
+        String expected = "Food";
+        groceryProductList.setType("Food");
         String actual = groceryProductList.getType();
         assertEquals(expected, actual);
     }
@@ -67,8 +67,8 @@ public class GroceryProductListTest
 
     @Test
     public void setExpiration() throws Exception {
-        String expected = "12/31/1999";
-        groceryProductList.setExpiration("12/31/1999");
+        String expected = "05/17/2024";
+        groceryProductList.setExpiration("05/17/2024");
         String actual = groceryProductList.getExpiration();
         assertEquals(expected, actual);
     }
