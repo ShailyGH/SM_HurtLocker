@@ -52,14 +52,14 @@ public class GroceryProductList
         this.expiration = expiration;
     }
 
-//    @Override
-//    public String toString()
-//    {
-//        return "GroceryProductList{" +
-//                "name = '" + name + '\'' +
-//                 ", price = " + price +
-//                "type = '" + type + '\'' +
-//                ", expiration = " + expiration +
-//                '}';
-//    }
+    @Override
+    public String toString()
+    {
+        return "GroceryProductList{" +
+                "name = '" + name + '\'' +
+                 ", price = " + price +
+                "type = '" + type + '\'' +
+                ", expiration = " + expiration +
+                '}';
+    }
 }

@@ -14,5 +14,8 @@ public class Main {
         String[] resultArray = GroceryParser.parseObjects(output).toString().split("[\\[\\]]");
         String result = resultArray[1];
 
+        String[] myArray = result.split("(?<=}),(?=\\{)");
+
+
     }
 }
