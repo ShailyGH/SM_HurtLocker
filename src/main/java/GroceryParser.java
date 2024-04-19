@@ -8,10 +8,10 @@ import java.util.regex.Pattern;
 public class GroceryParser
 {
     private final static String objRegex  = "#{2}";
-    private final static String fieldRegex  = "[;@:^*%]";
-    private final static String keyvalRegex  = "[:@^*%]";
+    private final static String fieldRegex  = "[!@;^%*]";
+    private final static String key_valRegex  = "[:@^*%]";
     private final static String nameRegex  = "[nN][aA][mM][eE]";
-    private final static String priceRegex  = "[pP][rR][iI][cC][eE]]";
+    private final static String priceRegex  = "[pP][rR][iI][cC][eE]";
     private final static String typeRegex  = "[tT][yY][pP][eE]";
     private final static String expirationRegex  = "[eE][xX][pP][iI][rR][aA][tT][iI][oO][nN]";
 
@@ -34,38 +34,38 @@ public class GroceryParser
     public static String parseFields(String parseMe)
     {
         ArrayList<String> fieldList = new ArrayList<>();
-
+        String val = "";
         String[] fieldArray = parseMe.split(fieldRegex);
 
-        for (String field : fieldArray)
+        for (String s : fieldArray)
         {
-            StringBuilder sb = new StringBuilder();
-            if(Pattern.compile(nameRegex).matcher(sb).find())
+            StringBuilder fields = new StringBuilder();
+            if(Pattern.compile(nameRegex).matcher(s).find())
             {
-                sb.append("name: ");
+                fields.append("name: ");
             }
-            else if (Pattern.compile(priceRegex).matcher(sb).find())
+            else if (Pattern.compile(priceRegex).matcher(s).find())
             {
-                sb.append("price: ");
+                fields.append("price: ");
             }
-            else if (Pattern.compile(typeRegex).matcher(sb).find())
+            else if (Pattern.compile(typeRegex).matcher(s).find())
             {
-                sb.append("type: ");
+                fields.append("type: ");
             }
-            else if (Pattern.compile(expirationRegex).matcher(sb).find())
+            else if (Pattern.compile(expirationRegex).matcher(s).find())
             {
-                sb.append("expiration: ");
+                fields.append("expiration: ");
             }
             else
             {
-                sb.append("null: ");
+                fields.append("null: ");
             }
 
-            String val;
             try
             {
-                String[] valArray = field.split(keyvalRegex);
-                val = valArray[1];
+                if(!s.isEmpty()) {
+                    val = s.split(key_valRegex)[1];
+                }
             }
             catch (IndexOutOfBoundsException e)
             {
@@ -74,14 +74,13 @@ public class GroceryParser
 
             if (!val.equals("null"))
             {
-                sb.append(val.toUpperCase(Locale.ROOT).charAt(0)).append(val.toLowerCase(Locale.ROOT).substring(1));
+                fields.append(val.toUpperCase(Locale.ROOT).charAt(0)).append(val.toLowerCase(Locale.ROOT).substring(1));
             }
             else
             {
-                sb.append(val);
+                fields.append(val);
             }
-
-            fieldList.add(field.toString());
+            fieldList.add(fields.toString());
         }
         return fieldList.toString();
     }
